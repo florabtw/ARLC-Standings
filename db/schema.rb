@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151004215846) do
+ActiveRecord::Schema.define(version: 20151004225211) do
+
+  create_table "divisions", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "league_id"
+    t.integer  "region_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "divisions", ["league_id"], name: "index_divisions_on_league_id"
+  add_index "divisions", ["region_id"], name: "index_divisions_on_region_id"
 
   create_table "leagues", force: :cascade do |t|
     t.string   "name"

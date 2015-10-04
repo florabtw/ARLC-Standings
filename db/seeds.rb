@@ -6,10 +6,20 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-League.create(name: 'Solo')
-League.create(name: 'Doubles')
-League.create(name: 'Standard')
+leagueSolo     = League.create(name: 'Solo')
+leaguesDoubles = League.create(name: 'Doubles')
+leagueStandard = League.create(name: 'Standard')
 
-Region.create(name: 'North America')
-Region.create(name: 'Europe')
-Region.create(name: 'Australia')
+regionNA = Region.create(name: 'North America')
+regionEU = Region.create(name: 'Europe')
+regionAU = Region.create(name: 'Australia')
+
+Division.create(name: 'NA Standard: Division 1', region: regionNA, league: leagueStandard)
+Division.create(name: 'NA Standard: Division 2', region: regionNA, league: leagueStandard)
+Division.create(name: 'EU Standard: Division 1', region: regionEU, league: leagueStandard)
+Division.create(name: 'EU Standard: Division 2', region: regionEU, league: leagueStandard)
+
+Division.create(name: 'NA Solo: Division 1', region: regionNA, league: leagueSolo)
+Division.create(name: 'NA Solo: Division 2', region: regionNA, league: leagueSolo)
+Division.create(name: 'EU Solo: Division 1', region: regionEU, league: leagueSolo)
+Division.create(name: 'EU Solo: Division 2', region: regionEU, league: leagueSolo)
