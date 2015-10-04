@@ -9,3 +9,7 @@
 League.create(name: 'Solo')
 League.create(name: 'Doubles')
 League.create(name: 'Standard')
+
+Region.create(name: 'North America')
+Region.create(name: 'Europe')
+Region.create(name: 'Australia')
