@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :divisions
+  resources :seasons
   resources :divisions
 
   # The priority is based upon order of creation: first created -> highest priority.
