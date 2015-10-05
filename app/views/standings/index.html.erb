@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th data-toggle="tooltip" title="Team Name">Team</th>
@@ -36,7 +36,9 @@
 
 <div class="form-group">
   <%= label :standings, :team %>
-  <%= collection_select :team, :team, Team.all, :id, :name %>
+  <%= collection_select :team, :team, Team.all, :id, :name,
+        { include_blank: 'Team...' },
+        { class: 'form-control' } %>
 </div>
 
 <% @standings.each_with_index do |team, index| %>
