@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'home#home'
   resources :matches do
     resources :games, except: :index, shallow: true
   end
