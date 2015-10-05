@@ -19,6 +19,7 @@
   <% for game in @match.games do %>
     <li><%= game.to_s %></li>
   <% end %>
+  <li><%= link_to 'Add Game', new_match_game_url(@match) %>
 </ul>
 
 <%= link_to 'Edit', edit_match_path(@match) %> |
