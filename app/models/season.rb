@@ -3,6 +3,6 @@ class Season < ActiveRecord::Base
   has_many :teams
 
   def to_s
-    self.name
+    self.division.to_s + ', ' + self.name
   end
 end
