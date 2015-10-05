@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :matches
+  resources :matches do
+    resources :games, except: :index, shallow: true
+  end
   resources :memberships
   resources :players
   resources :teams
