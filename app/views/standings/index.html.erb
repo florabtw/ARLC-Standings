@@ -33,4 +33,35 @@
     <% end %>
   </tbody>
 </table>
-<br>
+
+<div class="form-group">
+  <%= label :standings, :team %>
+  <%= collection_select :team, :team, Team.all, :id, :name %>
+</div>
+
+<% @standings.each_with_index do |team, index| %>
+  <table
+    id="<%= team.id %>"
+    class="table players <%= 'hidden' if index != 0 %>">
+    <thead>
+      <tr>
+        <th>Player</th>
+        <th>Goals</th>
+        <th>Assists</th>
+        <th>Saves</th>
+        <th>Shots</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% team.players.each do |player| %>
+        <tr>
+          <td><%= player.username %></td>
+          <td><%= player.goals %></td>
+          <td><%= player.assists %></td>
+          <td><%= player.saves %></td>
+          <td><%= player.shots %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
