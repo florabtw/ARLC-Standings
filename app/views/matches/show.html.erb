@@ -15,5 +15,11 @@
   <%= @match.match_status %>
 </p>
 
+<ul>
+  <% for game in @match.games do %>
+    <li><%= game.to_s %></li>
+  <% end %>
+</ul>
+
 <%= link_to 'Edit', edit_match_path(@match) %> |
 <%= link_to 'Back', matches_path %>
