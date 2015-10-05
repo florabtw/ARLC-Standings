@@ -23,3 +23,7 @@ Division.create(name: 'NA Solo: Division 1', region: regionNA, league: leagueSol
 Division.create(name: 'NA Solo: Division 2', region: regionNA, league: leagueSolo)
 Division.create(name: 'EU Solo: Division 1', region: regionEU, league: leagueSolo)
 Division.create(name: 'EU Solo: Division 2', region: regionEU, league: leagueSolo)
+
+MatchStatus.create(name: 'Played')
+MatchStatus.create(name: 'Playing')
+MatchStatus.create(name: 'Planned')
