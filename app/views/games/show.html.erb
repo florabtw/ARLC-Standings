@@ -5,4 +5,11 @@
   <%= @game.match %>
 </p>
 
+<ul>
+  <% for performance in @game.performances %>
+    <li><%= performance.to_s %>
+  <% end %>
+<ul>
+
 <%= link_to 'Edit', edit_game_path(@game) %>
+<%= link_to 'Show Match', @game.match %>
