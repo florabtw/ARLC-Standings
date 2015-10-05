@@ -19,9 +19,7 @@ class Team < ActiveRecord::Base
   end
 
   def goals_for
-    self.players.reduce(0) do |sum, p|
-      sum + p.performances.reduce(0) { |sum,pf| sum + pf.goals }
-    end
+    self.players.reduce(0) { |sum, p| sum + p.goals }
   end
 
   def goals_against
