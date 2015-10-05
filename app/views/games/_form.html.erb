@@ -1,4 +1,4 @@
-<%= form_for([@match, @game], as: :game) do |f| %>
+<%= form_for([@match, @game]) do |f| %>
   <% if @game.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@game.errors.count, "error") %> prohibited this game from being saved:</h2>
@@ -15,6 +15,34 @@
     <%= f.label :match_id %><br>
     <%= f.text_field :match_id, value: @game.match, disabled: true %>
   </div>
+
+  Performances:
+  <ul>
+    <%= f.fields_for :performances do |pf| %>
+      <div class="field">
+        <%= pf.label :player_id %>:
+        <%= pf.hidden_field :player_id %>
+        <span><%= pf.object.player.username %></span>
+      </div>
+      <div class="field">
+        <%= pf.label :goals %>
+        <%= pf.number_field :goals %>
+      </div>
+      <div class="field">
+        <%= pf.label :assists %>
+        <%= pf.number_field :assists %>
+      </div>
+      <div class="field">
+        <%= pf.label :saves %>
+        <%= pf.number_field :saves %>
+      </div>
+      <div class="field">
+        <%= pf.label :shots %>
+        <%= pf.number_field :shots %>
+      </div>
+    <% end %>
+  </ul>
+
   <div class="actions">
     <%= f.submit %>
   </div>

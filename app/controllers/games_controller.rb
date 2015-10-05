@@ -11,6 +11,9 @@ class GamesController < ApplicationController
   def new
     @match = Match.find(params[:match_id])
     @game = @match.games.new
+
+    players = @match.home_team.players + @match.away_team.players
+    players.each { |player| @game.performances.new(player: player) }
   end
 
   # GET /games/1/edit
@@ -21,7 +24,7 @@ class GamesController < ApplicationController
   # POST /games.json
   def create
     match = Match.find(params[:match_id])
-    @game = match.games.create()
+    @game = match.games.create(game_params)
 
     respond_to do |format|
       if @game.save
@@ -66,6 +69,8 @@ class GamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
-      params.permit(:match_id)
+      params
+        .require(:game)
+        .permit(:match_id, performances_attributes: [ :id, :player_id, :goals, :assists, :saves, :shots ])
     end
 end
