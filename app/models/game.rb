@@ -6,14 +6,30 @@ class Game < ActiveRecord::Base
 
   accepts_nested_attributes_for :performances
 
+  def won?(team)
+    if home_score > away_score then
+      team == self.home_team
+    else
+      team == self.away_team
+    end
+  end
+
+  def home_score
+    home_performances = self.performances.select { |p| p if self.home_team.players.include? p.player }
+    home_performances.sum { |p| p.goals }
+  end
+
+  def away_score
+    away_performances = self.performances.select { |p| p if self.away_team.players.include? p.player }
+    away_performances.sum { |p| p.goals }
+  end
+
   def to_s
     self.home_team.to_s + ' vs. ' + self.away_team.to_s + ': ' + score
   end
 
   private
     def score
-      home_performances = self.performances.select { |p| p if self.home_team.players.include? p.player }
-      away_performances = self.performances.select { |p| p if self.away_team.players.include? p.player }
-      home_performances.sum { |p| p.goals }.to_s + ' - ' + away_performances.sum { |p| p.goals }.to_s
+      home_score.to_s + ' - ' + away_score.to_s
     end
 end

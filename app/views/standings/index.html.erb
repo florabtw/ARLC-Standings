@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th data-toggle="tooltip" title="Team Name">Team</th>
+      <th data-toggle="tooltip" title="Wins">W</th>
+      <th data-toggle="tooltip" title="Losses">L</th>
+      <th data-toggle="tooltip" title="Goals For">GF</th>
+      <th data-toggle="tooltip" title="Goals Against">GA</th>
+      <th data-toggle="tooltip" title="Goal Difference">GD</th>
+      <th data-toggle="tooltip" title="Goals per Game">GPG</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @standings.each do |team| %>
+      <tr>
+        <td><%= team.name %></td>
+        <td><%= team.wins %></td>
+        <td><%= team.losses %></td>
+        <td><%= team.goals_for %></td>
+        <td><%= team.goals_against %></td>
+        <td><%= team.goal_difference %></td>
+        <td>
+          <%= number_with_precision(
+                team.goals_per_game,
+                precision: 2,
+                strip_insignificant_zeros: true
+              )
+          %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
