@@ -20,6 +20,7 @@ class MatchesController < ApplicationController
   def new
     @season = Season.find(params[:season_id])
     @match = Match.new
+    @available_teams = @season.teams
   end
 
   # GET /matches/1/edit
