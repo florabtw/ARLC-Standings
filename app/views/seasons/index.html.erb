@@ -2,7 +2,7 @@
 
 <h1>Listing Seasons</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
@@ -16,9 +16,17 @@
       <tr>
         <td><%= season.name %></td>
         <td><%= season.division %></td>
-        <td><%= link_to 'Show', season %></td>
-        <td><%= link_to 'Edit', edit_season_path(season) %></td>
-        <td><%= link_to 'Destroy', season, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', season, class: 'btn btn-info' %></td>
+        <td><%= link_to 'Edit', edit_season_path(season), class: 'btn btn-primary' %></td>
+        <td>
+          <%= link_to 'Destroy', season,
+                  {
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' },
+                    class: 'btn btn-danger'
+                  }
+          %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +34,4 @@
 
 <br>
 
-<%= link_to 'New Season', new_season_path %>
+<%= link_to 'New Season', new_season_path, class: 'btn btn-success' %>
