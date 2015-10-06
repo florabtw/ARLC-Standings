@@ -2,10 +2,13 @@ class MatchesController < ApplicationController
   before_action :authenticate, except: [:index, :show]
   before_action :set_match, only: [:show, :edit, :update, :destroy]
 
-  # GET /matches
-  # GET /matches.json
   def index
-    @matches = Match.all
+    if (params.has_key?(:season_id)) then
+      @season = Season.find(params[:season_id])
+      @matches = Match.all.select { |m| m if m.home_team.season == @season }
+    else
+      @matches = Match.all
+    end
   end
 
   # GET /matches/1
@@ -13,8 +16,8 @@ class MatchesController < ApplicationController
   def show
   end
 
-  # GET /matches/new
   def new
+    @season = Season.find(params[:season_id])
     @match = Match.new
   end
 
@@ -22,8 +25,6 @@ class MatchesController < ApplicationController
   def edit
   end
 
-  # POST /matches
-  # POST /matches.json
   def create
     @match = Match.new(match_params)
 

@@ -36,4 +36,6 @@
 
 <br>
 
-<%= link_to 'New Match', new_match_path, class: 'btn btn-success' %>
+<% if @season.present? %>
+  <%= link_to 'New Match', new_season_match_path(@season), class: 'btn btn-success' %>
+<% end %>

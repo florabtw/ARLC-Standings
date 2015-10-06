@@ -1,13 +1,23 @@
 Rails.application.routes.draw do
   root 'standings#index'
-  resources :matches do
+
+  resources :matches, except: [:new, :create] do
     resources :games, except: :index, shallow: true
   end
+
+  resources :seasons do
+    resources :matches, shallow: true
+  end
+
+
   resources :memberships
+
   resources :players
+
   resources :teams
-  resources :seasons
+
   resources :divisions
+
   get 'standings', to: 'standings#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

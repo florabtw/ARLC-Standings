@@ -1,4 +1,4 @@
-<%= form_for(@match) do |f| %>
+<%= form_for([@season, @match]) do |f| %>
   <% if @match.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@match.errors.count, "error") %> prohibited this match from being saved:</h2>
