@@ -13,11 +13,11 @@
 
   <div class="field">
     <%= f.label :home_team_id %><br>
-    <%= f.collection_select :home_team_id, Team.all, :id, :name %>
+    <%= f.collection_select :home_team_id, @season.teams, :id, :name %>
   </div>
   <div class="field">
     <%= f.label :away_team_id %><br>
-    <%= f.collection_select :away_team_id, Team.all, :id, :name %>
+    <%= f.collection_select :away_team_id, @season.teams, :id, :name %>
   </div>
   <div class="field">
     <%= f.label :match_status_id %><br>
