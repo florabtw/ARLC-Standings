@@ -11,39 +11,33 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :match_id %><br>
-    <%= f.text_field :match_id, value: @game.match, disabled: true %>
-  </div>
-
-  Performances:
-  <ul>
-    <%= f.fields_for :performances do |pf| %>
-      <div class="field">
-        <%= pf.label :player_id %>:
-        <%= pf.hidden_field :player_id %>
-        <span><%= pf.object.player.username %></span>
-      </div>
-      <div class="field">
-        <%= pf.label :goals %>
-        <%= pf.number_field :goals %>
-      </div>
-      <div class="field">
-        <%= pf.label :assists %>
-        <%= pf.number_field :assists %>
-      </div>
-      <div class="field">
-        <%= pf.label :saves %>
-        <%= pf.number_field :saves %>
-      </div>
-      <div class="field">
-        <%= pf.label :shots %>
-        <%= pf.number_field :shots %>
-      </div>
-    <% end %>
-  </ul>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Player</th>
+        <th>Goals</th>
+        <th>Assists</th>
+        <th>Saves</th>
+        <th>Shots</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= f.fields_for :performances do |performance| %>
+        <tr>
+          <td>
+            <%= performance.hidden_field :player_id %>
+            <%= performance.object.player %>
+          </td>
+          <td><%= performance.number_field :goals %></td>
+          <td><%= performance.number_field :assists %></td>
+          <td><%= performance.number_field :saves %></td>
+          <td><%= performance.number_field :shots %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-primary' %>
   </div>
 <% end %>

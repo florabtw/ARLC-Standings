@@ -1,5 +1,3 @@
-<h1>Editing Game</h1>
-
+<h1><%= @game.home_team %> vs. <%= @game.away_team %></h1>
+<%= link_to 'Cancel', @game.match, class: 'btn btn-default' %>
 <%= render 'form' %>
-
-<%= link_to 'Show', @game %>
