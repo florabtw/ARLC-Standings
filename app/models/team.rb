@@ -39,6 +39,10 @@ class Team < ActiveRecord::Base
     goals_for / games.size.to_f
   end
 
+  def players_string
+    self.players.map(&:username).join(',')
+  end
+
   def to_s
     self.name
   end
