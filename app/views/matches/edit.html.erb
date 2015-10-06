@@ -1,6 +1,7 @@
-<h1>Editing Match</h1>
+<div class="text-right">
+  <h1>Editing Match <small><%= @match.home_team.season %></small></h1>
+</div>
+
+<%= link_to 'Cancel', @match.home_team.season, class: 'btn btn-default' %>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @match %> |
-<%= link_to 'Back', matches_path %>
