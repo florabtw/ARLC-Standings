@@ -7,14 +7,12 @@ Rails.application.routes.draw do
 
   resources :seasons do
     resources :matches, except: :index, shallow: true
+    resources :teams, except: :index, shallow: true
   end
-
 
   resources :memberships
 
   resources :players
-
-  resources :teams
 
   resources :divisions
 

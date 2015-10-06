@@ -2,9 +2,8 @@ class TeamsController < ApplicationController
   before_action :authenticate, except: [:index, :show]
   before_action :set_team, only: [:show, :edit, :update, :destroy]
 
-  # GET /teams
-  # GET /teams.json
   def index
+    @season = Season.find(params[:season_id])
     @teams = Team.all
   end
 
@@ -15,7 +14,8 @@ class TeamsController < ApplicationController
 
   # GET /teams/new
   def new
-    @team = Team.new
+    @season = Season.find(params[:season_id])
+    @team = @season.teams.new
   end
 
   # GET /teams/1/edit
@@ -57,7 +57,7 @@ class TeamsController < ApplicationController
   def destroy
     @team.destroy
     respond_to do |format|
-      format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
+      format.html { redirect_to seasons_path, notice: 'Team was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -12,6 +12,36 @@
   </small>
 </h1>
 
+<h3>Teams</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @season.teams.each do |team| %>
+      <tr>
+        <td><%= team.name %></td>
+        <td><%= link_to 'Show', team, class: 'btn btn-info' %></td>
+        <td><%= link_to 'Edit', edit_team_path(team), class: 'btn btn-primary' %></td>
+        <td>
+          <%= link_to 'Destroy', team,
+                  {
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' },
+                    class: 'btn btn-danger'
+                  }
+          %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h3>Matches</h3>
 <table class="table">
   <thead>
     <tr>
