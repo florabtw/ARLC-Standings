@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
 
   resources :seasons do
-    resources :matches, shallow: true
+    resources :matches, except: :index, shallow: true
   end
 
 

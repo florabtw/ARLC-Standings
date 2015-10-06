@@ -5,7 +5,7 @@ class MatchesController < ApplicationController
   def index
     if (params.has_key?(:season_id)) then
       @season = Season.find(params[:season_id])
-      @matches = Match.all.select { |m| m if m.home_team.season == @season }
+      @matches = @season.matches
     else
       @matches = Match.all
     end
