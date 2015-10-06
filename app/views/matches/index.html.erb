@@ -18,9 +18,17 @@
         <td><%= match.home_team %></td>
         <td><%= match.away_team %></td>
         <td><%= match.match_status %></td>
-        <td><%= link_to 'Show', match %></td>
-        <td><%= link_to 'Edit', edit_match_path(match) %></td>
-        <td><%= link_to 'Destroy', match, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', match, class: 'btn btn-info' %></td>
+        <td><%= link_to 'Edit', edit_match_path(match), class: 'btn btn-primary' %></td>
+        <td>
+          <%= link_to 'Delete', match,
+                  {
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' },
+                    class: 'btn btn-danger'
+                  }
+          %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +36,4 @@
 
 <br>
 
-<%= link_to 'New Match', new_match_path %>
+<%= link_to 'New Match', new_match_path, class: 'btn btn-success' %>
