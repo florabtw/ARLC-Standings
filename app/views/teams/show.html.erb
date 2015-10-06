@@ -1,13 +1,35 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @team.name %>
-</p>
+<div class="text-right">
+  <%= link_to 'Edit Team', edit_team_path(@team), class: 'btn btn-default' %>
+</div>
 
-<p>
-  <strong>Season:</strong>
-  <%= @team.season %>
-</p>
+<div class="text-center">
+  <h1><%= @team.name %></h1>
+  <h4><small><%= @team.season %></small></h4>
+</div>
 
-<%= link_to 'Edit', edit_team_path(@team) %> |
+<table class="table">
+  <thead>
+    <tr>
+      <th>Player</th>
+      <th>Goals</th>
+      <th>Assists</th>
+      <th>Saves</th>
+      <th>Shots</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @team.players.each do |player| %>
+      <tr>
+        <td><%= player.username %></td>
+        <td><%= player.goals %></td>
+        <td><%= player.assists %></td>
+        <td><%= player.saves %></td>
+        <td><%= player.shots %></td>
+        <td><%= link_to 'Show', player, class: 'btn btn-info' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
