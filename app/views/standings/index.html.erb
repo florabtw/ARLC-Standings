@@ -36,9 +36,7 @@
 
 <div class="form-group">
   <%= label :standings, :team %>
-  <%= collection_select :team, :team, Team.all, :id, :name,
-        { include_blank: 'Team...' },
-        { class: 'form-control' } %>
+  <%= collection_select :team, :team, Team.all, :id, :name, {}, { class: 'form-control' } %>
 </div>
 
 <% @standings.each_with_index do |team, index| %>
