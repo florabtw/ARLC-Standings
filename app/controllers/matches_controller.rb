@@ -6,6 +6,7 @@ class MatchesController < ApplicationController
     if (params.has_key?(:season_id)) then
       @season = Season.find(params[:season_id])
       @matches = @season.matches
+      @available_teams = @season.teams
     else
       @matches = Match.all
     end
@@ -23,6 +24,7 @@ class MatchesController < ApplicationController
 
   # GET /matches/1/edit
   def edit
+    @available_teams = @match.home_team.season.teams
   end
 
   def create
