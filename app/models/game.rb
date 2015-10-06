@@ -6,6 +6,10 @@ class Game < ActiveRecord::Base
 
   accepts_nested_attributes_for :performances
 
+  def teams
+    [self.home_team, self.away_team]
+  end
+
   def won?(team)
     if home_score > away_score then
       team == self.home_team
@@ -28,8 +32,7 @@ class Game < ActiveRecord::Base
     self.home_team.to_s + ' vs. ' + self.away_team.to_s + ': ' + score
   end
 
-  private
-    def score
-      home_score.to_s + ' - ' + away_score.to_s
-    end
+  def score
+    home_score.to_s + ' - ' + away_score.to_s
+  end
 end

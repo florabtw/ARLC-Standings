@@ -1,26 +1,55 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Home team:</strong>
-  <%= @match.home_team %>
-</p>
+<div class="text-right">
+<%= link_to 'Edit Match', edit_match_path(@match), class: 'btn btn-default' %>
+</div>
 
-<p>
-  <strong>Away team:</strong>
-  <%= @match.away_team %>
-</p>
+<div class="text-center">
+  <h1>
+    <%= @match.home_team %> vs.
+    <%= @match.away_team %>
+    <small><%= @match.match_status %></small>
+  </h1>
+</div>
 
-<p>
-  <strong>Match status:</strong>
-  <%= @match.match_status %>
-</p>
+<% @match.games.each_with_index do |game, index| %>
+  <div class="row">
+    <div class="col-sm-6">
+      <h3>Game <%= (index + 1).to_s %> <small><%= game.score %></small></h3>
+    </div>
+    <div class="col-sm-6 text-right">
+      <%= link_to 'Edit', edit_game_path(game), class: 'btn btn-primary' %>
+      <%= link_to 'Destroy', game,
+              {
+                method: :delete,
+                data: { confirm: 'Are you sure?' },
+                class: 'btn btn-danger'
+              }
+      %>
+    </div>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Player</th>
+        <th>Goals</th>
+        <th>Assists</th>
+        <th>Saves</th>
+        <th>Shots</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% game.performances.each do |performance| %>
+        <tr>
+          <td><%= performance.player %></td>
+          <td><%= performance.goals %></td>
+          <td><%= performance.assists %></td>
+          <td><%= performance.saves %></td>
+          <td><%= performance.shots %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 
-<ul>
-  <% for game in @match.games do %>
-    <li><%= game.to_s %></li>
-  <% end %>
-  <li><%= link_to 'Add Game', new_match_game_url(@match) %>
-</ul>
-
-<%= link_to 'Edit', edit_match_path(@match) %> |
-<%= link_to 'Back', matches_path %>
+<%= link_to 'New Game', new_match_game_path(@match), class: 'btn btn-success' %>
