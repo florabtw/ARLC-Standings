@@ -22,14 +22,23 @@
     </tr>
   </thead>
   <tbody>
-    <% @team.players.each do |player| %>
+    <% @team.memberships.each do |membership| %>
       <tr>
-        <td><%= player.username %></td>
-        <td><%= player.goals %></td>
-        <td><%= player.assists %></td>
-        <td><%= player.saves %></td>
-        <td><%= player.shots %></td>
-        <td><%= link_to 'Show', player, class: 'btn btn-info' %></td>
+        <td><%= membership.player.username %></td>
+        <td><%= membership.player.goals %></td>
+        <td><%= membership.player.assists %></td>
+        <td><%= membership.player.saves %></td>
+        <td><%= membership.player.shots %></td>
+        <td><%= link_to 'Show', membership.player, class: 'btn btn-info' %></td>
+        <td>
+          <%= link_to 'Remove member', team_membership_path(@team, membership),
+                  {
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' },
+                    class: 'btn btn-danger'
+                  }
+          %>
+       </td>
       </tr>
     <% end %>
   </tbody>
