@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   resources :seasons, except: [:index, :new, :create] do
     resources :matches, except: :index, shallow: true
-    resources :teams, except: :index, shallow: true
+    resources :teams, shallow: true
   end
 
   resources :divisions do

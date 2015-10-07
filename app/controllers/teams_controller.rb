@@ -4,7 +4,7 @@ class TeamsController < ApplicationController
 
   def index
     @season = Season.find(params[:season_id])
-    @teams = Team.all
+    @teams = @season.teams
   end
 
   # GET /teams/1

@@ -1,0 +1,36 @@
+<div class="text-right">
+  <%= link_to 'New Team', new_season_team_path(@season), class: 'btn btn-success' %>
+</div>
+
+<div class="text-center">
+  <h1>Teams</h1>
+  <h1><small><%= @season.meta_info %></small></h1>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @teams.each do |team| %>
+      <tr>
+        <td><%= team.name %></td>
+        <td><%= link_to 'Show', team, class: 'btn btn-info' %></td>
+        <td><%= link_to 'Edit', edit_team_path(team), class: 'btn btn-primary' %></td>
+        <td>
+          <%= link_to 'Delete', team,
+                  {
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' },
+                    class: 'btn btn-danger'
+                  }
+          %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
