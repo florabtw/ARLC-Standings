@@ -11,14 +11,16 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :seasons do
+  resources :seasons, except: [:index, :new, :create] do
     resources :matches, except: :index, shallow: true
     resources :teams, except: :index, shallow: true
   end
 
-  resources :players
+  resources :divisions do
+    resources :seasons, except: :index, shallow: true
+  end
 
-  resources :divisions
+  resources :players
 
   get 'standings', to: 'standings#index'
 
