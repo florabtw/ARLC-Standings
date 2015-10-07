@@ -1,19 +1,48 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @division.name %>
-</p>
+<div class="text-right">
+  <%= link_to 'Edit Division', edit_division_path(@division), class: 'btn btn-default' %>
+</div>
 
-<p>
-  <strong>League:</strong>
-  <%= @division.league %>
-</p>
+<div class="text-center">
+  <h1><%= @division.name %></h1>
+</div>
+<div class="row">
+  <div class="col-sm-5 text-right">
+    <h2><small><%= @division.region.name %></small></h2>
+  </div>
+  <div class="col-sm-2">
+  </div>
+  <div class="col-sm-5 text-left">
+    <h2><small><%= @division.league.name %></small></h2>
+  </div>
+</div>
 
-<p>
-  <strong>Region:</strong>
-  <%= @division.region %>
-</p>
+<h3>Seasons</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
 
-<%= link_to 'Edit', edit_division_path(@division) %> |
-<%= link_to 'Back', divisions_path %>
+  <tbody>
+    <% @division.seasons.reverse.each do |season| %>
+      <tr>
+        <td><%= season.name %></td>
+        <td><%= link_to 'Show', season, class: 'btn btn-info' %></td>
+        <td><%= link_to 'Edit', edit_season_path(season), class: 'btn btn-primary' %></td>
+        <td>
+          <%= link_to 'Delete', season,
+                  {
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' },
+                    class: 'btn btn-danger'
+                  }
+          %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
