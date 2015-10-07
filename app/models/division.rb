@@ -9,6 +9,14 @@ class Division < ActiveRecord::Base
       .where(region: region)
   end
 
+  def meta_info
+    [
+      self.region.name,
+      self.league.name,
+      self.name
+    ].join(' - ')
+  end
+
   def to_s
     self.name
   end
