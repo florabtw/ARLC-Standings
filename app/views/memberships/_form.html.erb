@@ -12,10 +12,17 @@
   <% end %>
 
   <%= f.hidden_field :team_id %>
+  <%= f.hidden_field :player_id %>
   <div class="form-group">
-    <%= f.label :player_id %>
-    <%= f.autocomplete_field :player_id, autocomplete_player_username_team_memberships_path,
-          { class: 'form-control', placeholder: 'Type for autocomplete...' } %>
+    <%= f.label :player %>
+    <%=
+      f.autocomplete_field :player, autocomplete_player_username_team_memberships_path,
+        {
+          class: 'form-control',
+          placeholder: 'Type for autocomplete...',
+          id_element: '#membership_player_id'
+        }
+    %>
   </div>
   <div class="actions">
     <%= f.submit class: 'btn btn-success' %>
