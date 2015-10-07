@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   end
 
   resources :teams, except: [:index, :new, :create] do
-    resources :memberships, except: [:index, :show, :edit, :update]
+    resources :memberships, except: [:index, :show, :edit, :update] do
+      get :autocomplete_player_username, on: :collection
+    end
   end
 
   resources :seasons do
