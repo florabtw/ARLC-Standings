@@ -1,5 +1,5 @@
 class StandingsController < ApplicationController
   def index
-    @standings = Team.all
+    @seasons = Season.all
   end
 end

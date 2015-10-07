@@ -1,65 +1,36 @@
 <p id="notice"><%= notice %></p>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th data-toggle="tooltip" title="Team Name">Team</th>
-      <th data-toggle="tooltip" title="Wins">W</th>
-      <th data-toggle="tooltip" title="Losses">L</th>
-      <th data-toggle="tooltip" title="Goals For">GF</th>
-      <th data-toggle="tooltip" title="Goals Against">GA</th>
-      <th data-toggle="tooltip" title="Goal Difference">GD</th>
-      <th data-toggle="tooltip" title="Goals per Game">GPG</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @standings.each do |team| %>
-      <tr>
-        <td><%= team.name %></td>
-        <td><%= team.wins %></td>
-        <td><%= team.losses %></td>
-        <td><%= team.goals_for %></td>
-        <td><%= team.goals_against %></td>
-        <td><%= team.goal_difference %></td>
-        <td>
-          <%= number_with_precision(
-                team.goals_per_game,
-                precision: 2,
-                strip_insignificant_zeros: true
-              )
-          %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<div class="form-group">
-  <%= label :standings, :team %>
-  <%= collection_select :team, :team, Team.all, :id, :name, {}, { class: 'form-control' } %>
-</div>
-
-<% @standings.each_with_index do |team, index| %>
-  <table
-    id="<%= team.id %>"
-    class="table players <%= 'hidden' if index != 0 %>">
+<% for season in @seasons %>
+  <h4><%= season.meta_info %></h4>
+  <table class="table">
     <thead>
       <tr>
-        <th>Player</th>
-        <th>Goals</th>
-        <th>Assists</th>
-        <th>Saves</th>
-        <th>Shots</th>
+        <th data-toggle="tooltip" title="Team Name">Team</th>
+        <th data-toggle="tooltip" title="Wins">W</th>
+        <th data-toggle="tooltip" title="Losses">L</th>
+        <th data-toggle="tooltip" title="Goals For">GF</th>
+        <th data-toggle="tooltip" title="Goals Against">GA</th>
+        <th data-toggle="tooltip" title="Goal Difference">GD</th>
+        <th data-toggle="tooltip" title="Goals per Game">GPG</th>
       </tr>
     </thead>
     <tbody>
-      <% team.players.each do |player| %>
+      <% season.teams.each do |team| %>
         <tr>
-          <td><%= player.username %></td>
-          <td><%= player.goals %></td>
-          <td><%= player.assists %></td>
-          <td><%= player.saves %></td>
-          <td><%= player.shots %></td>
+          <td><%= team.name %></td>
+          <td><%= team.wins %></td>
+          <td><%= team.losses %></td>
+          <td><%= team.goals_for %></td>
+          <td><%= team.goals_against %></td>
+          <td><%= team.goal_difference %></td>
+          <td>
+            <%= number_with_precision(
+                  team.goals_per_game,
+                  precision: 2,
+                  strip_insignificant_zeros: true
+                )
+            %>
+          </td>
         </tr>
       <% end %>
     </tbody>
