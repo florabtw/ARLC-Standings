@@ -6,7 +6,6 @@ class MatchesController < ApplicationController
     if (params.has_key?(:season_id)) then
       @season = Season.find(params[:season_id])
       @matches = @season.matches
-      @available_teams = @season.teams
     else
       @matches = Match.all
     end

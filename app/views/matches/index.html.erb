@@ -1,6 +1,16 @@
 <p id="notice"><%= notice %></p>
+<% if @season.present? %>
+  <div class="text-right">
+    <%= link_to 'New Match', new_season_match_path(@season), class: 'btn btn-success' %>
+  </div>
+<% end %>
 
-<h1>Listing Matches</h1>
+<div class="text-center">
+  <h1>Matches</h1>
+  <% if @season.present? %>
+    <h1><small><%= @season.meta_info %></small></h1>
+  <% end %>
+</div>
 
 <table class="table">
   <thead>
