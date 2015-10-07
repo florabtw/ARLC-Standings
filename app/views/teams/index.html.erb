@@ -1,10 +1,16 @@
-<div class="text-right">
-  <%= link_to 'New Team', new_season_team_path(@season), class: 'btn btn-success' %>
-</div>
+<p id="notice"><%= notice %></p>
+
+<% if @season.present? %>
+  <div class="text-right">
+    <%= link_to 'New Team', new_season_team_path(@season), class: 'btn btn-success' %>
+  </div>
+<% end %>
 
 <div class="text-center">
   <h1>Teams</h1>
-  <h1><small><%= @season.meta_info %></small></h1>
+  <% if @season.present? %>
+    <h1><small><%= @season.meta_info %></small></h1>
+  <% end %>
 </div>
 
 <table class="table">

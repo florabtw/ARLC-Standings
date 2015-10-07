@@ -3,8 +3,12 @@ class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
 
   def index
-    @season = Season.find(params[:season_id])
-    @teams = @season.teams
+    if (params.has_key?(:season_id)) then
+      @season = Season.find(params[:season_id])
+      @teams = @season.teams
+    else
+      @teams = Team.all
+    end
   end
 
   # GET /teams/1

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :games, except: :index, shallow: true
   end
 
-  resources :teams, except: [:index, :new, :create] do
+  resources :teams, except: [:new, :create] do
     resources :memberships, except: [:index, :show, :edit, :update] do
       get :autocomplete_player_username, on: :collection
     end
