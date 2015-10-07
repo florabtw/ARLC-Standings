@@ -1,6 +1,10 @@
-<h1>New Season</h1>
-
-<%= link_to 'Cancel', seasons_path, class: 'btn btn-default' %>
+<div class="text-center">
+  <h1>New Season</h1>
+  <h1>
+    <small>
+      <%= [@division.region.name, @division.league.name, @division.name].join(',') %>
+    </small>
+  </h1>
+</div>
 
 <%= render 'form' %>
-

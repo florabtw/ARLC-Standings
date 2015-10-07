@@ -1,4 +1,4 @@
-<%= form_for(@season) do |f| %>
+<%= form_for([@division, @season]) do |f| %>
   <% if @season.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@season.errors.count, "error") %> prohibited this season from being saved:</h2>
@@ -15,11 +15,8 @@
     <%= f.label :name %><br>
     <%= f.text_field :name, class: 'form-control' %>
   </div>
-  <div class="form-group">
-    <%= f.label :division_id %><br>
-    <%= f.collection_select :division_id, Division.all, :id, :name, {}, class: 'form-control' %>
-  </div>
   <div class="actions">
+    <%= link_to 'Cancel', @season.division, class: 'btn btn-default' %>
     <%= f.submit class: 'btn btn-primary' %>
   </div>
 <% end %>
