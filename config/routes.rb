@@ -5,12 +5,14 @@ Rails.application.routes.draw do
     resources :games, except: :index, shallow: true
   end
 
+  resources :teams, except: [:index, :new, :create] do
+    resources :memberships, except: [:index, :show, :edit, :update]
+  end
+
   resources :seasons do
     resources :matches, except: :index, shallow: true
     resources :teams, except: :index, shallow: true
   end
-
-  resources :memberships
 
   resources :players
 
