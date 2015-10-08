@@ -3,6 +3,10 @@ class Player < ActiveRecord::Base
   has_many :teams, through: :memberships
   has_many :performances
 
+  def season_team(season)
+    self.teams.find_by(season: season)
+  end
+
   def goals
     self.performances.reduce(0) { |sum, p| sum + p.goals }
   end

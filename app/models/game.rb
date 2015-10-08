@@ -19,12 +19,16 @@ class Game < ActiveRecord::Base
   end
 
   def home_score
-    home_performances = self.performances.select { |p| p if self.home_team.players.include? p.player }
+    season = self.match.home_team.season
+    home_performances = self.performances.select { |p| p if p.player.season_team(season) == self.home_team }
+
     home_performances.sum { |p| p.goals }
   end
 
   def away_score
-    away_performances = self.performances.select { |p| p if self.away_team.players.include? p.player }
+    season = self.match.home_team.season
+    away_performances = self.performances.select { |p| p if p.player.season_team(season) == self.away_team }
+
     away_performances.sum { |p| p.goals }
   end
 

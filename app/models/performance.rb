@@ -2,6 +2,8 @@ class Performance < ActiveRecord::Base
   belongs_to :game
   belongs_to :player
 
+  has_one :match, through: :game
+
   after_initialize :init_stats
 
   def init_stats
