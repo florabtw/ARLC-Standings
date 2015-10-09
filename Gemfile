@@ -14,6 +14,7 @@ gem "twitter-bootstrap-rails"
 gem 'jquery-ui-rails'
 gem 'rails4-autocomplete'
 gem 'rails_12factor'
+gem 'actionpack-action_caching'
 
 group :development, :test do
   gem 'debugger'

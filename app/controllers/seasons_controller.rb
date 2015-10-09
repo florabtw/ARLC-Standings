@@ -2,6 +2,8 @@ class SeasonsController < ApplicationController
   before_action :authenticate, except: [:show, :index]
   before_action :set_season, only: [:show, :edit, :update, :destroy]
 
+  caches_action :show, expires_in: 1.hour
+
   def show
   end
 
