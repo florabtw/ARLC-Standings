@@ -15,7 +15,7 @@
       </tr>
     </thead>
     <tbody>
-      <% season.teams.each do |team| %>
+      <% season.ordered_teams.each do |team| %>
         <tr>
           <td><%= team.name %></td>
           <td><%= team.wins %></td>
