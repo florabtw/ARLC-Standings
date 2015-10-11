@@ -10,6 +10,36 @@ class Season < ActiveRecord::Base
     self.teams.sort_by { |t| [-t.wins, -t.goal_difference, -t.goals_for] }
   end
 
+  def standings
+    standings = []
+    ordered_teams.each do |team|
+      standing = {}
+      standing[:id] = team.id
+      standing[:name] = team.name
+      standing[:wins] = team.wins
+      standing[:losses] = team.losses
+      standing[:goals_for] = team.goals_for
+      standing[:goals_against] = team.goals_against
+      standing[:goal_difference] = team.goal_difference
+      standing[:goals_per_game] = team.goals_per_game
+      standing[:players] = []
+
+      team.players.each do |player|
+        result = {}
+        result[:name] = player.username
+        result[:goals] = player.goals
+        result[:assists] = player.assists
+        result[:saves] = player.saves
+        result[:shots] = player.shots
+        standing[:players] << result
+      end
+
+      standings << standing
+    end
+
+    standings
+  end
+
   def meta_info
     [
       self.division.region.name,

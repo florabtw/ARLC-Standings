@@ -5,6 +5,10 @@ class SeasonsController < ApplicationController
   caches_action :show, expires_in: 1.hour
 
   def show
+    respond_to do |format|
+      format.html { render :show, location: @season }
+      format.json { render json: @season.standings }
+    end
   end
 
   def new
