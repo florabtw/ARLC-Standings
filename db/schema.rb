@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151005005505) do
+ActiveRecord::Schema.define(version: 20151022051247) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "divisions", force: :cascade do |t|
     t.string   "name"
@@ -21,8 +24,8 @@ ActiveRecord::Schema.define(version: 20151005005505) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "divisions", ["league_id"], name: "index_divisions_on_league_id"
-  add_index "divisions", ["region_id"], name: "index_divisions_on_region_id"
+  add_index "divisions", ["league_id"], name: "index_divisions_on_league_id", using: :btree
+  add_index "divisions", ["region_id"], name: "index_divisions_on_region_id", using: :btree
 
   create_table "games", force: :cascade do |t|
     t.integer  "match_id"
@@ -30,7 +33,7 @@ ActiveRecord::Schema.define(version: 20151005005505) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "games", ["match_id"], name: "index_games_on_match_id"
+  add_index "games", ["match_id"], name: "index_games_on_match_id", using: :btree
 
   create_table "leagues", force: :cascade do |t|
     t.string   "name"
@@ -52,9 +55,9 @@ ActiveRecord::Schema.define(version: 20151005005505) do
     t.datetime "updated_at",      null: false
   end
 
-  add_index "matches", ["away_team_id"], name: "index_matches_on_away_team_id"
-  add_index "matches", ["home_team_id"], name: "index_matches_on_home_team_id"
-  add_index "matches", ["match_status_id"], name: "index_matches_on_match_status_id"
+  add_index "matches", ["away_team_id"], name: "index_matches_on_away_team_id", using: :btree
+  add_index "matches", ["home_team_id"], name: "index_matches_on_home_team_id", using: :btree
+  add_index "matches", ["match_status_id"], name: "index_matches_on_match_status_id", using: :btree
 
   create_table "memberships", force: :cascade do |t|
     t.integer  "team_id"
@@ -63,8 +66,8 @@ ActiveRecord::Schema.define(version: 20151005005505) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "memberships", ["player_id"], name: "index_memberships_on_player_id"
-  add_index "memberships", ["team_id"], name: "index_memberships_on_team_id"
+  add_index "memberships", ["player_id"], name: "index_memberships_on_player_id", using: :btree
+  add_index "memberships", ["team_id"], name: "index_memberships_on_team_id", using: :btree
 
   create_table "performances", force: :cascade do |t|
     t.integer  "game_id"
@@ -77,8 +80,8 @@ ActiveRecord::Schema.define(version: 20151005005505) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "performances", ["game_id"], name: "index_performances_on_game_id"
-  add_index "performances", ["player_id"], name: "index_performances_on_player_id"
+  add_index "performances", ["game_id"], name: "index_performances_on_game_id", using: :btree
+  add_index "performances", ["player_id"], name: "index_performances_on_player_id", using: :btree
 
   create_table "players", force: :cascade do |t|
     t.string   "username"
@@ -86,6 +89,7 @@ ActiveRecord::Schema.define(version: 20151005005505) do
     t.string   "steam_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "alt_name"
   end
 
   create_table "regions", force: :cascade do |t|
@@ -101,7 +105,7 @@ ActiveRecord::Schema.define(version: 20151005005505) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "seasons", ["division_id"], name: "index_seasons_on_division_id"
+  add_index "seasons", ["division_id"], name: "index_seasons_on_division_id", using: :btree
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"
@@ -110,6 +114,6 @@ ActiveRecord::Schema.define(version: 20151005005505) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "teams", ["season_id"], name: "index_teams_on_season_id"
+  add_index "teams", ["season_id"], name: "index_teams_on_season_id", using: :btree
 
 end

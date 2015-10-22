@@ -24,7 +24,7 @@
     <tbody>
       <%= f.fields_for :performances do |performance| %>
         <tr>
-          <td>
+          <td title="<%= performance.object.player.alt_name %>">
             <%= performance.hidden_field :player_id %>
             <%= performance.object.player %>
           </td>
