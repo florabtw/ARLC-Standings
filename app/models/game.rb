@@ -29,10 +29,12 @@ class Game < ActiveRecord::Base
   end
 
   def away_score
-    season = self.match.home_team.season
-    away_performances = self.performances.select { |p| p if p.player.season_team(season) == self.away_team }
+    Rails.cache.fetch("#{cache_key}/away_score") do
+      season = self.match.home_team.season
+      away_performances = self.performances.select { |p| p if p.player.season_team(season) == self.away_team }
 
-    away_performances.sum { |p| p.goals }
+      away_performances.sum { |p| p.goals }
+    end
   end
 
   def to_s
