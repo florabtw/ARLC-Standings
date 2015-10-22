@@ -38,7 +38,8 @@ class Team < ActiveRecord::Base
 
   def goals_per_game
     games = home_games + away_games
-    goals_for / games.size.to_f
+    num_games = games.size.to_f
+    goals_for / (num_games.nonzero? || 1)
   end
 
   def players_string
