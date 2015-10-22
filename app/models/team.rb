@@ -19,12 +19,14 @@ class Team < ActiveRecord::Base
   end
 
   def goals_for
-    self.players.reduce(0) { |sum, p| sum + p.goals }
+    home_goals_for = home_games.reduce(0) { |sum, g| sum + g.home_score }
+    away_goals_for = away_games.reduce(0) { |sum, g| sum + g.away_score }
+
+    return home_goals_for + away_goals_for
   end
 
   def goals_against
     home_goals_against = home_games.reduce(0) { |sum, g| sum + g.away_score }
-
     away_goals_against = away_games.reduce(0) { |sum, g| sum + g.home_score }
 
     return home_goals_against + away_goals_against
