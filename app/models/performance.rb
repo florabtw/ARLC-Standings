@@ -3,6 +3,8 @@ class Performance < ActiveRecord::Base
   belongs_to :player
 
   has_one :match, through: :game
+  has_one :home_team, through: :match
+  has_one :away_team, through: :match
 
   after_initialize :init_stats
 

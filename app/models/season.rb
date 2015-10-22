@@ -27,10 +27,10 @@ class Season < ActiveRecord::Base
       team.players.each do |player|
         result = {}
         result[:name] = player.username
-        result[:goals] = player.goals
-        result[:assists] = player.assists
-        result[:saves] = player.saves
-        result[:shots] = player.shots
+        result[:goals] = player.team_goals(team)
+        result[:assists] = player.team_assists(team)
+        result[:saves] = player.team_saves(team)
+        result[:shots] = player.team_shots(team)
         standing[:players] << result
       end
 

@@ -11,19 +11,40 @@ class Player < ActiveRecord::Base
     self.performances.reduce(0) { |sum, p| sum + p.goals }
   end
 
+  def team_goals(team)
+    team_performances(team).reduce(0) { |sum, p| sum + p.goals }
+  end
+
   def assists
     self.performances.reduce(0) { |sum, p| sum + p.assists }
+  end
+
+  def team_assists(team)
+    team_performances(team).reduce(0) { |sum, p| sum + p.assists }
   end
 
   def saves
     self.performances.reduce(0) { |sum, p| sum + p.saves }
   end
 
+  def team_saves(team)
+    team_performances(team).reduce(0) { |sum, p| sum + p.saves }
+  end
+
   def shots
     self.performances.reduce(0) { |sum, p| sum + p.shots}
+  end
+
+  def team_shots(team)
+    team_performances(team).reduce(0) { |sum, p| sum + p.shots }
   end
 
   def to_s
     self.username
   end
+
+  private
+    def team_performances(team)
+      self.performances.select { |p| p if p.home_team == team || p.away_team == team }
+    end
 end
