@@ -46,9 +46,10 @@ class Player < ActiveRecord::Base
   end
 
   def steam_name
-    if not self.steam_id.blank? then
+    unless self.steam_id.blank? then
       begin
         steam_id = SteamId.new self.steam_id
+        steam_id.fetch
         steam_id.nickname
       rescue
         self.steam_id
