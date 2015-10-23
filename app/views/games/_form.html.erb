@@ -24,7 +24,11 @@
     <tbody>
       <%= f.fields_for :performances do |performance| %>
         <tr>
-          <td title="<%= performance.object.player.alt_name %>">
+          <% unless performance.object.player.steam_id.blank? %>
+          <td title="<%= performance.object.player.steam_name %>">
+          <% else %>
+          <td title="<%= performance.object.player.psn_id %>">
+          <% end %>
             <%= performance.hidden_field :player_id %>
             <%= performance.object.player %>
           </td>

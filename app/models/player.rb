@@ -5,8 +5,6 @@ class Player < ActiveRecord::Base
   has_many :teams, through: :memberships
   has_many :performances
 
-  before_save :save_alt_name
-
   def season_team(season)
     self.teams.find_by(season: season)
   end
@@ -47,21 +45,19 @@ class Player < ActiveRecord::Base
     self.username
   end
 
+  def steam_name
+    if not self.steam_id.blank? then
+      begin
+        steam_id = SteamId.new self.steam_id
+        steam_id.nickname
+      rescue
+        self.steam_id
+      end
+    end
+  end
+
   private
     def team_performances(team)
       self.performances.select { |p| p if p.home_team == team || p.away_team == team }
-    end
-
-    def save_alt_name
-      if not self.steam_id.blank? then
-        begin
-          steam_id = SteamId.new self.steam_id
-          self.alt_name = steam_id.nickname
-        rescue
-          self.alt_name = self.steam_id
-        end
-      else
-        self.alt_name = self.psn_id
-      end
     end
 end
