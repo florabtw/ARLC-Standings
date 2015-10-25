@@ -10,6 +10,13 @@ class MembershipsController < ApplicationController
   end
 
   def create
+    # lookup player if autocomplete wasn't used
+    if params[:membership][:player_id].blank? then
+      player = lookup_player
+      player_id = player.id unless player.nil?
+      params[:membership][:player_id] = player_id
+    end
+
     @membership = Membership.new(membership_params)
 
     respond_to do |format|
@@ -17,6 +24,7 @@ class MembershipsController < ApplicationController
         format.html { redirect_to @membership.team, notice: 'Membership was successfully created.' }
         format.json { render :show, status: :created, location: @membership }
       else
+        @team = Team.find(params[:team_id])
         format.html { render :new }
         format.json { render json: @membership.errors, status: :unprocessable_entity }
       end
@@ -33,13 +41,15 @@ class MembershipsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_membership
       @membership = Membership.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def membership_params
       params.require(:membership).permit(:team_id, :player_id)
+    end
+
+    def lookup_player
+      Player.where('lower(username) = ?', params[:membership][:player].downcase).first
     end
 end
