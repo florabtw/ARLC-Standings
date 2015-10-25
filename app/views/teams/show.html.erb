@@ -25,10 +25,10 @@
     <% @team.memberships.each do |membership| %>
       <tr>
         <td><%= membership.player.username %></td>
-        <td><%= membership.player.goals %></td>
-        <td><%= membership.player.assists %></td>
-        <td><%= membership.player.saves %></td>
-        <td><%= membership.player.shots %></td>
+        <td><%= membership.player.team_goals(@team) %></td>
+        <td><%= membership.player.team_assists(@team) %></td>
+        <td><%= membership.player.team_saves(@team) %></td>
+        <td><%= membership.player.team_shots(@team) %></td>
         <td><%= link_to 'Show', membership.player, class: 'btn btn-info' %></td>
         <td>
           <%= link_to 'Remove member', team_membership_path(@team, membership),
