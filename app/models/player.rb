@@ -1,6 +1,9 @@
 class Player < ActiveRecord::Base
   require 'steam-condenser/community'
 
+  validates :psn_id, uniqueness: { case_sensitive: false, allow_blank: true }
+  validates :steam_id, uniqueness: { case_sensitive: false, allow_blank: true }
+
   has_many :memberships
   has_many :teams, through: :memberships
   has_many :performances
