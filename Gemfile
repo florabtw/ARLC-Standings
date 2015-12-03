@@ -18,7 +18,7 @@ gem 'actionpack-action_caching'
 gem 'steam-condenser'
 
 group :development, :test do
-  gem 'debugger'
+  gem 'byebug'
 end
 
 group :development do
